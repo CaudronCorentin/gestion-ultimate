@@ -1,0 +1,79 @@
+<script setup>
+import Button from './Bouton.vue';
+import { RouterLink } from 'vue-router';
+import { useAuthStore } from "@/stores/auth";
+
+const auth = useAuthStore();
+
+const clickhome = () => {
+  router.push("/")
+};
+
+</script>
+
+<template>
+  <header class="header">
+    <router-link to="/" active-class="no-active-style">
+      <h1 class="logo">UltiMATE</h1>
+    </router-link>
+    <nav>
+      <RouterLink v-if="auth.isAdmin" to="/NouveauJoueur" class="nav-link">Ajouter Joueur</RouterLink>
+      <RouterLink v-if="auth.isAdmin" to="/AjouterEquipe" class="nav-link">Ajouter Equipe</RouterLink>
+      <RouterLink v-if="auth.isAdmin" to="/AjouterCompetition" class="nav-link">Ajouter Compétition</RouterLink>
+      <RouterLink v-if="auth.isVisiteur" to="/request" class="nav-link">Rejoindre une équipe</RouterLink>
+      <RouterLink v-if="auth.isAdmin" to="/requestadmin" class="nav-link">Demande joueurs</RouterLink>
+      <RouterLink to="/" class="nav-link">Accueil</RouterLink>
+      <RouterLink to="/Matchs" class="nav-link">Matchs</RouterLink>
+      <RouterLink to="/Terrains" class="nav-link">Terrains</RouterLink>
+      <RouterLink to="/Equipe" class="nav-link">Equipe</RouterLink>
+      <RouterLink to="/Competition" class="nav-link">Compétition</RouterLink>
+      <RouterLink v-if="auth.isVisiteur" to="/mon-compte" class="nav-link">Mon compte</RouterLink>
+      <Button v-if="!auth.isAuthenticated" to="/Connexion" active-class="no-active-style" label="Connexion" />
+      <Button v-else active-class="no-active-style" label="Deconnexion" />
+
+      
+      
+    </nav>
+  </header>
+</template>
+
+<style scoped>
+.header {
+  background-color: white;
+  padding: 16px 24px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  display: flex;
+  justify-content: space-between;
+
+  position: relative; 
+  z-index: 1000;
+}
+nav {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+
+.nav-link {
+  color: black;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: #7a0ca7;
+}
+
+.router-link-active {
+  color: #515151;
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+</style>
