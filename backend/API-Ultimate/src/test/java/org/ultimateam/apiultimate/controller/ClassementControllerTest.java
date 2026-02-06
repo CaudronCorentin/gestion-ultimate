@@ -12,7 +12,7 @@ import org.ultimateam.apiultimate.model.Classement;
 import org.ultimateam.apiultimate.service.ClassementService;
 
 import java.util.List;
-@RestController
+
 @Tag(name = "Classement", description = "Endpoints pour gérer le classement")
 @RequestMapping("/api/classement")
 @Tag(name = "Classement", description = "Endpoints pour gérer les classements")
